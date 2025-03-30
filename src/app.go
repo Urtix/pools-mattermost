@@ -5,7 +5,7 @@ import (
 	"github.com/rs/zerolog"
 )
 
-type application struct {
+type Application struct {
 	config                    config
 	logger                    zerolog.Logger
 	mattermostClient          *model.Client4

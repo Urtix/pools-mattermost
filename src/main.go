@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	app := &application{
+	app := &Application{
 		pollStorage: &PollStorage{
 			Polls: make(map[string]Poll),
 		},

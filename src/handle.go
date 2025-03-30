@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func handlePost(app *application, post *model.Post) {
+func handlePost(app *Application, post *model.Post) {
 	app.logger.Debug().Str("message", post.Message).Msg("")
 	app.logger.Debug().Interface("post", post).Msg("")
 
@@ -30,7 +30,7 @@ func handlePost(app *application, post *model.Post) {
 }
 
 // Создание голосования
-func handlePollCommand(app *application, post *model.Post) {
+func handlePollCommand(app *Application, post *model.Post) {
 	args, err := splitArgs(post.Message)
 	if err != nil {
 		sendResponse(app, post.ChannelId, "Ошибка: Незакрытые кавычки", post)
@@ -103,7 +103,7 @@ func handlePollCommand(app *application, post *model.Post) {
 }
 
 // Удаление голосования
-func handleDeleteCommand(app *application, post *model.Post) {
+func handleDeleteCommand(app *Application, post *model.Post) {
 	args := strings.Fields(post.Message)
 	if len(args) != 2 {
 		sendResponse(app, post.ChannelId, "Используйте: /delete [ID_опроса]", post)
@@ -134,7 +134,7 @@ func handleDeleteCommand(app *application, post *model.Post) {
 }
 
 // Преждевременная остановка голосования
-func handleCloseCommand(app *application, post *model.Post) {
+func handleCloseCommand(app *Application, post *model.Post) {
 	args := strings.Fields(post.Message)
 	if len(args) != 2 {
 		sendResponse(app, post.ChannelId, "Используйте: /close [ID_опроса]", post)
@@ -171,7 +171,7 @@ func handleCloseCommand(app *application, post *model.Post) {
 }
 
 // Получение результатов голосования
-func handleResultCommand(app *application, post *model.Post) {
+func handleResultCommand(app *Application, post *model.Post) {
 	args := strings.Fields(post.Message)
 	if len(args) != 2 {
 		sendResponse(app, post.ChannelId, "Используйте: /result [ID_опроса]", post)
@@ -218,7 +218,7 @@ func handleResultCommand(app *application, post *model.Post) {
 }
 
 // Отправка голоса
-func handleVoteCommand(app *application, post *model.Post) {
+func handleVoteCommand(app *Application, post *model.Post) {
 	args := strings.Fields(post.Message)
 	if len(args) != 3 {
 		sendResponse(app, post.ChannelId, "Используйте: /vote [ID_опроса] [номер_варианта]", post)
@@ -276,7 +276,7 @@ func handleVoteCommand(app *application, post *model.Post) {
 	sendResponse(app, post.ChannelId, "Ваш голос учтен!", post)
 }
 
-func handleHelpCommand(app *application, post *model.Post) {
+func handleHelpCommand(app *Application, post *model.Post) {
 	helpText := `Доступные команды:
 
 /poll [время] "Вопрос" "Вариант 1" "Вариант 2" ... - Создать опрос

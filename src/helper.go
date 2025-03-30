@@ -10,7 +10,7 @@ import (
 	"unicode"
 )
 
-func setupGracefulShutdown(app *application) {
+func setupGracefulShutdown(app *Application) {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 	go func() {
@@ -25,7 +25,7 @@ func setupGracefulShutdown(app *application) {
 	}()
 }
 
-func listenToEvents(app *application) {
+func listenToEvents(app *Application) {
 	var err error
 	failCount := 0
 	for {
@@ -48,7 +48,7 @@ func listenToEvents(app *application) {
 	}
 }
 
-func handleWebSocketEvent(app *application, event *model.WebSocketEvent) {
+func handleWebSocketEvent(app *Application, event *model.WebSocketEvent) {
 
 	if event.EventType() != model.WebsocketEventPosted {
 		return
@@ -67,7 +67,7 @@ func handleWebSocketEvent(app *application, event *model.WebSocketEvent) {
 	handlePost(app, post)
 }
 
-func sendResponse(app *application, channelId string, msg string, originalPost *model.Post) {
+func sendResponse(app *Application, channelId string, msg string, originalPost *model.Post) {
 	post := &model.Post{
 		ChannelId: channelId,
 		Message:   msg,
@@ -83,7 +83,7 @@ func sendResponse(app *application, channelId string, msg string, originalPost *
 	}
 }
 
-func sendHelp(app *application, channelId string, originalPost *model.Post) {
+func sendHelp(app *Application, channelId string, originalPost *model.Post) {
 	helpText := `Некорректный формат команды. Пример использования:
 /poll 2h "Лучший язык?" "Go" "Python"
 `

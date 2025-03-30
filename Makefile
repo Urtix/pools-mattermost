@@ -2,7 +2,8 @@
 
 # Golang Flags
 GOFLAGS ?= $(GOFLAGS:)
-GO=go
+GO = go
+SRC_DIR = src
 
 run:
-	$(GO) run $(GOFLAGS) $(GO_LINKER_FLAGS) *.go
+	cd $(SRC_DIR) && $(GO) run $(GOFLAGS) $(GO_LINKER_FLAGS) .
